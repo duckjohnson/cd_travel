@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_invoice_tree" model="ir.ui.view">
+            <field name="name">view_travel_invoice_tree</field>
+            <field name="model">cd.travel.invoice</field>
+            <field name="arch" type="xml">
+                <tree string="Invoice">
+                    <field name="code_invoice"/>
+                    <field name="booking_code"/>
+                    <field name="booking_tour_code"/>
+                    <field name="booking_tour_name"/>
+                    <field name="booking_tour_time_visit"/>
+                    <field name="booking_tour_time_start"/>
+                    <field name="booking_tour_price"/>
+                    <field name="booking_customer_name"/>
+                    <field name="booking_customer_name"/>
+                    <field name="booking_customer_identity"/>
+                    <field name="booking_customer_email" widget="email"/>
+                    <field name="payment_amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_invoice_form" model="ir.ui.view">
+            <field name="name">view_travel_invoice_form</field>
+            <field name="model">cd.travel.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Invoice">
+                    <header>
+                        <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                        <button name="action_send_card" type="object" string="send email" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <header>
+                            <field name="state" widget="statusbar" statusbar_visible="unpaid,paid"
+                                   clickable="true"/>
+                        </header>
+                        <group>
+                            <group>
+                                <field name="code_invoice"/>
+                                <field name="booking_code" domain="[('state', '=', 'inactive')]"/>
+                                <field name="booking_tour_detail_name"/>
+                                <field name="booking_tour_time_visit"/>
+                                <field name="booking_tour_time_start"/>
+                                <field name="booking_tour_address_start"/>
+                                <field name="booking_tour_price"/>
+                            </group>
+                            <group>
+                                <field name="booking_customer_name"/>
+                                <field name="booking_customer_identity"/>
+                                <field name="booking_customer_DOB"/>
+                                <field name="booking_customer_gender"/>
+                                <field name="booking_customer_phone"/>
+                                <field name="booking_customer_email" widget="email"/>
+                                <field name="booking_customer_address"/>
+                            </group>
+                            <group>
+                                <field name="booking_tour_adults"/>
+                                <field name="booking_tour_child"/>
+                                <field name="booking_tour_kid"/>
+                                <field name="booking_tour_baby"/>
+                                <field name="booking_tour_single_room"/>
+                                <field name="booking_tour_guest_number"/>
+<!--                                <field name="invoice_date"/>-->
+<!--                                <field name="payment_date"/>-->
+                            </group>
+                            <group>
+                                <field name="booking_vehicle_code"/>
+                                <field name="booking_driver_name"/>
+                                <field name="booking_driver_phone"/>
+                                <field name="booking_guide_name"/>
+                                <field name="booking_guide_phone"/>
+                            </group>
+                            <group class="oe_right">
+                                <field name="booking_tour_sale"/>
+                                <field name="booking_tour_amount"/>
+                                <field name="booking_total_payment"/>
+                                <field name="booking_remaining_amount"/>
+                                <field name="payment_amount"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_invoice_search" model="ir.ui.view">
+            <field name="name">view_travel_invoice_search</field>
+            <field name="model">cd.travel.invoice</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="code_invoice"/>
+                    <field name="booking_code"/>
+                    <field name="booking_customer_name"/>
+                    <field name="booking_customer_identity"/>
+                    <field name="booking_customer_phone"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_state" string="Trạng thái" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="view_travel_invoice_act" model="ir.actions.act_window">
+            <field name="name">Invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.invoice</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="view_travel_invoice_search"/>
+        </record>
+
+        <menuitem id="cd_travel_invoice_menu" name="Invoice"
+                  parent="cd_travel_menu"
+                  action="view_travel_invoice_act"
+                  groups="group_cd_travel_accountant,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"/>
+    </data>
+</odoo>

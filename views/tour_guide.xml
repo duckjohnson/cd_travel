@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_tour_guide_tree" model="ir.ui.view">
+            <field name="name">view_travel_tour_guide_tree</field>
+            <field name="model">cd.travel.tour.guide</field>
+            <field name="arch" type="xml">
+                <tree string="Tour guide">
+                    <field name="guide_name"/>
+                    <field name="working_time"/>
+                    <field name="revenue"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_tour_guide_form" model="ir.ui.view">
+            <field name="name">view_travel_tour_guide_form</field>
+            <field name="model">cd.travel.tour.guide</field>
+            <field name="arch" type="xml">
+                <form string="Tour guide">
+                    <sheet>
+                        <header>
+                            <field name="state" widget="statusbar" statusbar_visible="free_time,working"
+                                   clickable="true"/>
+                        </header>
+                        <div class="oe_button_box" name="button_box"
+                             groups="cd-travel.group_cd_travel_manager,cd-travel.group_cd_travel_admin,cd-travel.group_cd_travel_accountant">
+                            <button name="salary" type="action"
+                                    class="oe_stat_button" icon="fa-usd">
+                                <field name="revenue"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="guide_name"/>
+                            </group>
+                            <group>
+                                <field name="working_time"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="list_tour_detail" string="Danh sách tour đã đi">
+                                <field name="list_tour_detail">
+                                    <tree>
+                                        <field name='code' readonly="1"/>
+                                        <field name='name' readonly="1"/>
+                                        <field name='travel_tour_time_visit' readonly="1"/>
+                                        <field name='date_start' readonly="1"/>
+                                        <field name='date_end' readonly="1"/>
+                                        <field name='price' readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_tour_guide_search" model="ir.ui.view">
+            <field name="name">view_travel_tour_guide_search</field>
+            <field name="model">cd.travel.tour.guide</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="guide_name"/>
+                    <separator/>
+<!--                    <group expand="0" string="Group By">-->
+<!--                        <filter name="group_by_state" string="Trạng thái" context="{'group_by':'state'}"/>-->
+<!--                    </group>-->
+                </search>
+            </field>
+        </record>
+        <record id="cd_travel_tour_guide_act" model="ir.actions.act_window">
+            <field name="name">Salary guide</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.tour.guide</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="view_travel_tour_guide_search"/>
+        </record>
+
+        <menuitem id="cd_travel_tour_guide_menu" name="Salary guide"
+                  parent="cd_travel_menu"
+                  action="cd_travel_tour_guide_act"
+                  groups="group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"/>
+
+    </data>
+</odoo>

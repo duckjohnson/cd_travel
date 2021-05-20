@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <h3 style="text-align: center;">Báo cáo công nợ KH
+                        <t t-esc="doc.booking_customer_name.name"/>
+                    </h3>
+                    <h4 style="text-align: center;">Ngày:
+                        <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y')"/>
+                    </h4>
+                    <div style="display: inline;">
+                        <h3>
+                            <span>Mã hoá đơn:
+                                <t t-esc="doc.code"/>
+                            </span>
+                        </h3>
+                        <h3>
+                            <span>Mã đặt tour:
+                                <t t-esc="doc.booking_code.code"/>
+                            </span>
+                        </h3>
+                    </div>
+                    <br/>
+                    <div>
+                        <h4>Tên khách hàng:
+                            <t t-esc="doc.booking_customer_name.name"/>
+                        </h4>
+                        <h4>CMND or Passport:
+                            <t t-esc="doc.booking_customer_identity"/>
+                        </h4>
+                        <h4>Số điện thoại:
+                            <t t-esc="doc.booking_customer_phone"/>
+                        </h4>
+                        <h4>Giới tính:
+                            <t t-esc="doc.booking_customer_gender"/>
+                        </h4>
+                        <h4>Địa chỉ:
+                            <t t-esc="doc.booking_customer_address"/>
+                        </h4>
+                    </div>
+                    <h3>Thông tin đặt tour</h3>
+                    <table style="width: 100%">
+                        <tr>
+                            <th>Tên tour</th>
+                            <th>Giá tour</th>
+                            <th>Số phòng đơn</th>
+                            <th>Người lớn</th>
+                            <th>Trẻ em</th>
+                            <th>Trẻ nhỏ</th>
+                            <th>Sơ sinh</th>
+                            <th>Thời gian</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <t t-esc="doc.booking_tour_name.name"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_price"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_single_room"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_adults"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_child"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_kid"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_baby"/>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_time_visit"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <div style="text-align: right;">Sale</div>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_sale"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <div style="text-align: right;">Thành tiền</div>
+                            </td>
+                            <td>
+                                <t t-esc="doc.booking_tour_amount"/>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

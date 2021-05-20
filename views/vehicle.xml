@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_vehicle_tree" model="ir.ui.view">
+            <field name="name">view_travel_vehicle_tree</field>
+            <field name="model">cd.travel.vehicle</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicle">
+                    <field name="name"/>
+                    <field name="type_vehicle"/>
+                    <field name="driver_name"/>
+                    <field name="seats"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_vehicle_form" model="ir.ui.view">
+            <field name="name">view_travel_vehicle_form</field>
+            <field name="model">cd.travel.vehicle</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle">
+                    <sheet>
+                        <header>
+                            <field name="state" widget="statusbar" statusbar_visible="free_time,working"
+                                   clickable="true"/>
+                        </header>
+                        <div class="oe_button_box" name="button_box"
+                             groups="cd-travel.group_cd_travel_manager,cd-travel.group_cd_travel_admin">
+                            <button name="revenue" type="action"
+                                    class="oe_stat_button" icon="fa-usd">
+                                <field name="revenue"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="type_vehicle"/>
+                                <field name="seats"/>
+                            </group>
+                            <group>
+                                <field name="driver_name"/>
+                                <field name="driver_phone"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="list_tour_detail" string="Danh sách tour đã đi">
+                                <field name="list_tour_detail">
+                                    <tree>
+                                        <field name='name' readonly="1"/>
+                                        <field name='date_start' readonly="1"/>
+                                        <field name='date_end' readonly="1"/>
+                                        <field name='travel_tour_time_visit' readonly="1"/>
+                                        <field name='travel_tour_address_start' readonly="1"/>
+                                        <field name='travel_tour_time_address_come' readonly="1"/>
+                                        <field name='revenue' readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="list_vehicle_operating_fee" string="Chi phí tổn hao"
+                                  attrs="{'invisible': [('type_vehicle','=', 'planes')]}">
+                                <field name="list_vehicle_operating_fee">
+                                    <tree>
+                                        <field name='name' readonly="1"/>
+                                        <field name='date_fee' readonly="1"/>
+                                        <field name='price' readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_vehicle_search" model="ir.ui.view">
+            <field name="name">view_travel_vehicle_search</field>
+            <field name="model">cd.travel.vehicle</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="driver_name"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_seats" string="Số ghế" context="{'group_by':'seats'}"/>
+                        <filter name="group_by_type" string="Phương tiện" context="{'group_by':'type'}"/>
+                        <filter name="group_by_state" string="Trạng thái" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="cd_travel_vehicle_act" model="ir.actions.act_window">
+            <field name="name">Driver</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.vehicle</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="view_travel_vehicle_search"/>
+        </record>
+
+        <menuitem id="cd_travel_vehicle_menu" name="Vehicle"
+                  parent="cd_travel_menu"
+                  action="cd_travel_vehicle_act"
+                  groups="group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"/>
+
+    </data>
+</odoo>

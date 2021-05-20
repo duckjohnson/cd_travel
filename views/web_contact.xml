@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="contact_page" name="Contact">
+        <t t-call="website.layout">
+            <div class="container">
+                <t t-foreach="data_ct" t-as="ct">
+                    <table style="border: 5px; width: 200px; height: 200px">
+                        <tr>
+                            <th>Mã contact</th>
+                            <td>
+                                <t t-esc="ct.code"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Tên</th>
+                            <td>
+                                <t t-esc="ct.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ</th>
+                            <td>
+                                <t t-esc="ct.address"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Hotline</th>
+                            <td>
+                                <t t-esc="ct.hotline"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Fax</th>
+                            <td>
+                                <t t-esc="ct.fax"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>
+                                <t t-esc="ct.email"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái</th>
+                            <td>
+                                <t t-esc="ct.active"/>
+                            </td>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </table>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

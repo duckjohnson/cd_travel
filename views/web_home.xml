@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="exp_page" name="Experience">
+        <t t-call="website.layout">
+            <div class="container">
+                <t t-foreach="data_exp" t-as="exp">
+                    <t t-esc="exp.code"/>
+                    <t t-esc="exp.name"/>
+                    <t t-esc="exp.content"/>
+                    <t t-esc="exp.active"/>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

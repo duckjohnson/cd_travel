@@ -1,0 +1,71 @@
+<odoo>
+    <data>
+        <record id="cd_employee_tree" model="ir.ui.view">
+            <field name="name">cd_employee_tree</field>
+            <field name="model">cd.travel.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Field">
+                    <field name='code'/>
+                    <field name='name'/>
+                    <field name='identify'/>
+                    <field name='phone'/>
+                    <field name='account_login'/>
+                    <field name='position_name'/>
+                </tree>
+            </field>
+        </record>
+        <record id="cd_employee_form" model="ir.ui.view">
+            <field name="name">cd_employee_form</field>
+            <field name="model">cd.travel.employee</field>
+            <field name="arch" type="xml">
+                <form string="Field">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='code'/>
+                                <field name='name'/>
+                                <field name='identify'/>
+                                <field name='phone'/>
+                                <field name='DOB'/>
+                            </group>
+                            <group>
+                                <field name='gender'/>
+                                <field name='address'/>
+                                <field name='position_name'/>
+                                <field name='account'/>
+                                <field name='account_login'/>
+                                <field name="salary"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="cd_employee_search" model="ir.ui.view">
+            <field name="name">cd_employee_search</field>
+            <field name="model">cd.travel.employee</field>
+            <field name="arch" type="xml">
+                <search string="Field">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <filter name="gender" string="Boy" domain="[('gender', '=', 'boy')]"/>
+                    <filter name="gender" string="Girl" domain="[('gender', '=', 'girl')]"/>
+                </search>
+            </field>
+        </record>
+        <record id="cd_employee_act" model="ir.actions.act_window">
+            <field name="name">Employee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="cd_employee_search"/>
+
+        </record>
+
+        <menuitem id="cd_employee_menu" name="Employee"
+                  parent="cd_travel_menu"
+                  action="cd_employee_act"
+                  groups="group_cd_travel_posting_staff,group_cd_travel_employee_booking,group_cd_travel_accountant,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"/>
+    </data>
+</odoo>

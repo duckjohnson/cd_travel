@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_tour_booking_tree" model="ir.ui.view">
+            <field name="name">view_travel_tour_booking_tree</field>
+            <field name="model">cd.travel.tour.booking</field>
+            <field name="arch" type="xml">
+                <tree string="Tour booking">
+                    <field name="code_booking"/>
+                    <field name="tour_detail_name"/>
+                    <field name="tour_detail_date_start"/>
+                    <field name="tour_detail_date_end"/>
+                    <field name="customer_name"/>
+                    <field name="customer_identity"/>
+                    <field name="customer_phone"/>
+                    <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_tour_booking_form" model="ir.ui.view">
+            <field name="name">view_travel_tour_booking_form</field>
+            <field name="model">cd.travel.tour.booking</field>
+            <field name="arch" type="xml">
+                <form string="Tour booking">
+                    <sheet>
+                        <header>
+                            <field name="state" widget="statusbar" statusbar_visible="inactive,active,pay_off,cancel"
+                                   clickable="true" group="group_cd_travel_manager,group_cd_travel_admin"/>
+                        </header>
+                        <group>
+                            <group>
+                                <field name="code_booking"/>
+                                <field name="tour_detail_name"/>
+                                <field name="tour_detail_date_start"/>
+                                <field name="tour_detail_date_end"/>
+                                <field name="tour_detail_time_visit"/>
+                                <field name="tour_detail_address_start"/>
+                                <field name="tour_detail_time_start"/>
+                                <field name="tour_detail_time_drop_off"/>
+                                <field name="tour_detail_time_address_come"/>
+                                <field name="tour_detail_time_come"/>
+                                <field name="tour_detail_time_pick_up"/>
+                                <field name="tour_detail_price"/>
+                                <field name="tour_detail_deposit"/>
+                            </group>
+                            <group>
+                                <field name="customer_name"/>
+                                <field name="customer_identity"/>
+                                <field name="customer_DOB"/>
+                                <field name="customer_gender"/>
+                                <field name="customer_phone"/>
+                                <field name="customer_email"/>
+                                <field name="customer_address"/>
+                                <field name="guest_number"/>
+                                <field name="total_converts"/>
+                                <field name="tour_detail_seats_number"/>
+                                <field name="tour_detail_remaining_seats"/>
+                            </group>
+                            <group>
+                                <field name="adults"/>
+                                <field name="child"/>
+                                <field name="kid"/>
+                                <field name="baby"/>
+                                <field name="single_room"/>
+                            </group>
+                            <group>
+                                <field name="adults_price"/>
+                                <field name="child_price"/>
+                                <field name="kid_price"/>
+                                <field name="baby_price"/>
+                                <field name="single_room_price"/>
+                            </group>
+                            <group>
+                                <field name="sale"/>
+                                <field name="amount"/>
+                                <field name="deposit"/>
+                                <field name="total_payment"/>
+                            </group>
+                            <group>
+                                <field name="remaining_amount"/>
+                                <field name="deposit_lost"/>
+                                <field name="payment_to_customer"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="list_invoice_booking" string="Danh sách thanh toán">
+                                <field name="list_invoice_booking">
+                                    <tree>
+                                        <field name='code_invoice' readonly="1"/>
+                                        <field name='booking_code' readonly="1"/>
+                                        <field name='payment_amount' readonly="1"/>
+                                        <field name='state' readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_tour_booking_calendar" model="ir.ui.view">
+            <field name="name">view_tour_detail_calendar</field>
+            <field name="model">cd.travel.tour.booking</field>
+            <field name="arch" type="xml">
+                <calendar string="Tour booking" mode="month" date_start="tour_detail_date_start"
+                          date_stop="tour_detail_date_end"
+                          color="code_booking">
+                    <field name="customer_name"/>
+                    <field name="tour_detail_date_start"/>
+                    <field name="tour_detail_date_end"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+        <record id="view_travel_tour_booking_search" model="ir.ui.view">
+            <field name="name">view_travel_tour_booking_search</field>
+            <field name="model">cd.travel.tour.booking</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="code_booking"/>
+                    <field name="tour_detail_code"/>
+                    <field name="tour_detail_name"/>
+                    <field name="customer_name"/>
+                    <field name="customer_identity"/>
+                    <field name="customer_phone"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_tour_name" string="Tên tour" context="{'group_by':'tour_name'}"/>
+                        <filter name="group_by_state" string="Trạng thái" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="view_travel_tour_booking_act" model="ir.actions.act_window">
+            <field name="name">Tour booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.tour.booking</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="search_id" ref="view_travel_tour_booking_search"/>
+        </record>
+
+        <menuitem id="cd_travel_tour_booking_menu" name="Tour booking"
+                  parent="cd_travel_menu"
+                  action="view_travel_tour_booking_act"
+                  groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"/>
+
+    </data>
+</odoo>

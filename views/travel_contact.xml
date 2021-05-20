@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_contact_tree" model="ir.ui.view">
+            <field name="name">view_travel_contact_tree</field>
+            <field name="model">cd.travel.contact</field>
+            <field name="arch" type="xml">
+                <tree string="Travel contact">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="hotline"/>
+                    <field name="fax"/>
+                    <field name="email"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_contact_form" model="ir.ui.view">
+            <field name="name">view_travel_contact_form</field>
+            <field name="model">cd.travel.contact</field>
+            <field name="arch" type="xml">
+                <form string="Travel contact">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"
+                             groups="cd-travel.group_cd_travel_manager,cd-travel.group_cd_travel_admin">
+                            <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="address"/>
+                            <field name="hotline"/>
+                            <field name="fax"/>
+                            <field name="email" widget="email"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_contact_search" model="ir.ui.view">
+            <field name="name">view_travel_contact_search</field>
+            <field name="model">cd.travel.contact</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+        <record id="cd_travel_contact_act" model="ir.actions.act_window">
+            <field name="name">Travel contact</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.contact</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="view_travel_contact_search"/>
+        </record>
+
+        <menuitem id="cd_travel_contact_menu" name="Travel contact"
+                  parent="cd_travel_menu"
+                  action="cd_travel_contact_act"
+                  groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"/>
+
+    </data>
+</odoo>
