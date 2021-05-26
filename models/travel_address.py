@@ -12,9 +12,9 @@ class TravelAddress(models.Model):
 
     code = fields.Char(string='Mã địa điểm du lịch', default=lambda self: _('New'), readonly=True)
     name = fields.Char(string='Tên địa điểm du lịch', required=True)
-    description = fields.Text(string='Mô tả', required=True)
+    description = fields.Text(string='Mô tả')
 
-    name_travel_region = fields.Many2one('cd.travel.region.travel', string='Vùng du lịch', required=True)
+    name_travel_region = fields.Many2one('cd.travel.region.travel', string='Vùng du lịch')
 
     active = fields.Boolean(default=True, track_visibility='onchange')
 

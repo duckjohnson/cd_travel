@@ -52,18 +52,18 @@
             </field>
         </record>
         <record id="cd_travel_news_act" model="ir.actions.act_window">
-            <field name="name">Travel news</field>
+            <field name="name">News</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cd.travel.news</field>
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_news_search"/>
         </record>
-
-        <menuitem id="cd_travel_news_menu" name="Travel news"
-                  parent="cd_travel_menu"
+        <menuitem id="cd_travel_news_menu" name="News"
+                  parent="cd_travel_menu_news"
                   action="cd_travel_news_act"
                   groups="group_cd_travel_posting_staff,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="1"
+        />
 
     </data>
 </odoo>

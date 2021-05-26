@@ -10,10 +10,10 @@ from odoo.exceptions import UserError
 class Employee(models.Model):
     _name = 'cd.travel.employee'
     _description = 'Employee  Of Cd Travel'
+    _rec_name = 'name'
 
     code = fields.Char(string='Mã nhân viên', required=True, index=True,
-                       default=lambda self: _('New'),
-                       readonly=True)
+                       default=lambda self: _('New'), readonly=True)
     name = fields.Char(string='Tên nhân viên', required=True)
     DOB = fields.Date(string='Ngày sinh', required=True)
     gender = fields.Selection([
@@ -24,12 +24,20 @@ class Employee(models.Model):
     identify = fields.Char(string='Số căn cước công dân', required=True)
     phone = fields.Char(string='Số điện thoại', required=True)
     address = fields.Char(string='Địa chỉ')
-    salary = fields.Float(string='Lương cứng')
+
+    salary = fields.One2many('cd.travel.base.salary', 'emp_name', string='Danh sách hợp đồng')
+    base_money = fields.Float(string='Lương cơ bản', compute='compute_base_salary')
 
     position_name = fields.Many2one('cd.travel.position', string='Chức vụ', required=True)
 
     account = fields.Many2one('res.users', required=True)
     account_login = fields.Char(related='account.login', readonly=True)
+
+    state_guide = state = fields.Selection([
+        ('free_time', 'Đang chờ'),
+        ('working', 'Đang làm việc')],
+        string='Trạng thái', default='free_time'
+    )
 
     @api.model
     def create(self, vals):
@@ -47,3 +55,11 @@ class Employee(models.Model):
     def validate_DOB(self):
         if self.DOB >= str(datetime.date.today()):
             raise UserError('Ngày sinh phải trước ngày hiện tại')
+
+    @api.multi
+    @api.depends('salary')
+    def compute_base_salary(self):
+        for record in self:
+            for r in record.salary:
+                if r.state == 'use':
+                    record.base_money = r.money

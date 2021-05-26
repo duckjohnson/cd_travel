@@ -20,7 +20,7 @@
             <field name="arch" type="xml">
                 <form string="Travel handbook">
                     <sheet>
-                         <div class="oe_button_box" name="button_box">
+                        <div class="oe_button_box" name="button_box">
                             <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
                                 <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
                             </button>
@@ -52,18 +52,18 @@
             </field>
         </record>
         <record id="cd_travel_handbook_act" model="ir.actions.act_window">
-            <field name="name">Travel handbook</field>
+            <field name="name">Handbook</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cd.travel.handbook</field>
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_handbook_search"/>
         </record>
-
-        <menuitem id="cd_travel_handbook_menu" name="Travel handbook"
-                  parent="cd_travel_menu"
+        <menuitem id="cd_travel_handbook_menu" name="Handbook"
+                  parent="cd_travel_menu_news"
                   action="cd_travel_handbook_act"
                   groups="group_cd_travel_posting_staff,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="2"
+        />
 
     </data>
 </odoo>

@@ -66,9 +66,9 @@
                 <search string="Search">
                     <field name="guide_name"/>
                     <separator/>
-<!--                    <group expand="0" string="Group By">-->
-<!--                        <filter name="group_by_state" string="Trạng thái" context="{'group_by':'state'}"/>-->
-<!--                    </group>-->
+                    <!--                    <group expand="0" string="Group By">-->
+                    <!--                        <filter name="group_by_state" string="Trạng thái" context="{'group_by':'state'}"/>-->
+                    <!--                    </group>-->
                 </search>
             </field>
         </record>
@@ -84,7 +84,7 @@
                   parent="cd_travel_menu"
                   action="cd_travel_tour_guide_act"
                   groups="group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
-
+                  sequence="10"
+        />
     </data>
 </odoo>

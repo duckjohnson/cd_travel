@@ -38,7 +38,8 @@ class TourBooking(models.Model):
 
     sale = fields.Char(string='sale', compute='compute_sale', readonly=True)
 
-    tour_detail_name = fields.Many2one('cd.travel.tour.detail', string='Tên chuyến', required=True)
+    tour_detail_name = fields.Many2one('cd.travel.tour.detail', string='Tên chuyến', required=True,
+                                       domain=[('state', '=', 'still_empty')])
     tour_detail_code = fields.Char(string='Mã chuyến', related='tour_detail_name.code', readonly=True)
     tour_detail_deposit = fields.Integer(string='Tỷ lệ cọc(%)', related='tour_detail_name.deposit_ratio', readonly=True)
     tour_detail_date_start = fields.Date(string='Ngày khởi hành', related='tour_detail_name.date_start', readonly=True)
@@ -75,8 +76,7 @@ class TourBooking(models.Model):
         string='Giới tính', related='customer_name.gender', readonly=True
     )
 
-    list_invoice_booking = fields.One2many('cd.travel.invoice', 'booking_code', string='Danh sách thanh toán',
-                                           domain=[('state', '=', 'paid')])
+    list_invoice_booking = fields.One2many('cd.travel.invoice', 'booking_code', string='Danh sách thanh toán',)
 
     state = fields.Selection([
         ('inactive', 'Chưa xác nhận'),

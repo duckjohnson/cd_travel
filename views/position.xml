@@ -34,6 +34,7 @@
                   parent="cd_travel_menu"
                   action="position_act"
                   groups="group_cd_travel_posting_staff,group_cd_travel_employee_booking,group_cd_travel_accountant,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="7"
+        />
     </data>
 </odoo>

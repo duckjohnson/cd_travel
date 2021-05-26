@@ -24,7 +24,7 @@ class TourDetail(models.Model):
     note = fields.Text(string='Ghi chú')
 
     list_booking_detail = fields.One2many('cd.travel.tour.booking', 'tour_detail_name', string='Danh sách booking',
-                                          domain=[('state', '=', 'active')])
+                                          domain=[('state', '!=', 'cancel')])
 
     booking_seats = fields.Integer(string='Số ghế đã đặt', compute='compute_seats')
     remaining_seats = fields.Integer(string='Số ghế còn lại', compute='compute_seats')
@@ -51,7 +51,7 @@ class TourDetail(models.Model):
     vehicle_driver_phone = fields.Char(string='Điện thoại tài xế', related='vehicle_name.driver_name.phone')
 
     name_tour_guide = fields.Many2one('cd.travel.employee', string='Tên hướng dẫn viên',
-                                      domain=[('position_name', '=', 'guide')])
+                                      domain=[('position_name', '=', 'guide'), ('state', '=', 'free_time')])
     phone_tour_guide = fields.Char(string='Điện thoại', related='name_tour_guide.phone')
 
     sale_name = fields.Many2one('cd.travel.info.sale', string='Tên sale')
@@ -64,11 +64,11 @@ class TourDetail(models.Model):
     state = fields.Selection([
         ('still_empty', 'Còn chỗ'),
         ('full', 'Đã đủ'),
-        ('end', 'Đã kết thúc'),
-        ('cancel', 'Đã hủy')],
+        ('end', 'Đã kết thúc')],
         string='Trạng thái', default='still_empty', track_visibility='onchange'
         # , compute='compute_seats'
     )
+    active = fields.Boolean(default=True, track_visibility='onchange')
 
     @api.model
     def create(self, vals):
@@ -99,17 +99,20 @@ class TourDetail(models.Model):
     @api.depends('travel_tour_price', 'sale_type', 'sale_amount')
     def compute_price(self):
         for record in self:
+            record.price = record.travel_tour_price
             if record.sale_type == 'phantram':
                 record.price = record.travel_tour_price - (record.travel_tour_price * record.sale_amount) / 100
             if record.sale_type == 'vnd':
                 record.price = record.travel_tour_price - record.sale_amount
 
     @api.multi
-    @api.depends('list_booking_detail', 'list_booking_detail.guest_number', 'vehicle_seats')
+    @api.depends('list_booking_detail', 'list_booking_detail.guest_number', 'vehicle_seats',
+                 'list_booking_detail.state')
     def compute_seats(self):
         for record in self:
             for r in record.list_booking_detail:
-                record.booking_seats += r.guest_number - r.baby
+                if r.state == 'active' or r.state == 'pay_off':
+                    record.booking_seats += r.guest_number - r.baby
             record.remaining_seats = record.vehicle_seats - record.booking_seats
             # for r in record.travel_tour_name:
             #     if record.booking_seats == r.seats_number:

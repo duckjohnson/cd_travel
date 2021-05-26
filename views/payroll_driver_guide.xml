@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_payroll_driver_guide_tree" model="ir.ui.view">
+            <field name="name">view_travel_payroll_driver_guide_tree</field>
+            <field name="model">cd.travel.payroll.driver.guide</field>
+            <field name="arch" type="xml">
+                <tree string="Payroll">
+                    <field name="name"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="emp_name"/>
+                    <field name="emp_position"/>
+                    <field name="achieve_kpi"/>
+                    <field name="total_salary"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_payroll_driver_guide_form" model="ir.ui.view">
+            <field name="name">view_travel_payroll_driver_guide_form</field>
+            <field name="model">cd.travel.payroll.driver.guide</field>
+            <field name="arch" type="xml">
+                <form string="Payroll ">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="from_date"/>
+                                <field name="to_date"/>
+                                <field name="emp_name" options="{'no_create_edit': True}"/>
+                                <field name="emp_position"/>
+                                <field name="emp_salary"/>
+                                <field name="personal_income_tax"/>
+                                <field name="total_salary"/>
+                            </group>
+                            <group>
+                                <field name="working_time"/>
+                                <field name="total_guests"/>
+                                <field name="count_tour"/>
+                                <field name="planning_name" options="{'no_create_edit': True}"/>
+                                <field name="planning_kpi_type" readonly="True"/>
+                                <field name="achieve_kpi"/>
+                            </group>
+
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_payroll_driver_guide_search" model="ir.ui.view">
+            <field name="name">view_travel_payroll_driver_guide_search</field>
+            <field name="model">cd.travel.payroll.driver.guide</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="cd_travel_payroll_driver_guide_act" model="ir.actions.act_window">
+            <field name="name">Salary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.payroll.driver.guide</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="view_travel_payroll_driver_guide_search"/>
+        </record>
+        <menuitem id="cd_travel_payroll" name="Payroll"
+                  parent="cd_travel_report_salary"
+                  action="cd_travel_payroll_driver_guide_act"
+                  groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"
+        />
+
+    </data>
+</odoo>

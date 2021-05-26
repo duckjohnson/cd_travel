@@ -54,16 +54,11 @@
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_type_search"/>
         </record>
-
-        <menuitem id="cd_travel_menu" name="CD travel" sequence="1"
-                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
-        />
-        <menuitem id="cd_travel_type_travel_menu" name="Travel type"
-                  parent="cd_travel_menu"
+        <menuitem id="cd_travel_type_travel_menu" name="Type"
+                  parent="cd_travel_menu_travel"
                   action="cd_travel_type_travel_act"
                   groups="group_cd_travel_manager,group_cd_travel_admin"
                   sequence="1"
         />
-
     </data>
 </odoo>

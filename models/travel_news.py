@@ -13,7 +13,7 @@ class TravelNews(models.Model):
     code = fields.Char(string='Mã tin', default=lambda self: _('New'), readonly=True)
     name = fields.Char(string='Tên tin', required=True)
     content = fields.Text(string='Nội dung', required=True)
-    time_news = fields.Date(string='Thời gian')
+    time_news = fields.Date(string='Thời gian đăng')
     image = fields.Binary(string='Hình ảnh')
     active = fields.Boolean(default=True, track_visibility='onchange')
 

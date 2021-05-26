@@ -8,8 +8,7 @@
                 <tree string="Invoice">
                     <field name="code_invoice"/>
                     <field name="booking_code"/>
-                    <field name="booking_tour_code"/>
-                    <field name="booking_tour_name"/>
+                    <field name="booking_tour_detail_code"/>
                     <field name="booking_tour_time_visit"/>
                     <field name="booking_tour_time_start"/>
                     <field name="booking_tour_price"/>
@@ -39,7 +38,8 @@
                         <group>
                             <group>
                                 <field name="code_invoice"/>
-                                <field name="booking_code" domain="[('state', '=', 'inactive')]"/>
+                                <field name="booking_code"
+                                       options="{'no_create_edit': True}"/>
                                 <field name="booking_tour_detail_name"/>
                                 <field name="booking_tour_time_visit"/>
                                 <field name="booking_tour_time_start"/>
@@ -62,8 +62,8 @@
                                 <field name="booking_tour_baby"/>
                                 <field name="booking_tour_single_room"/>
                                 <field name="booking_tour_guest_number"/>
-<!--                                <field name="invoice_date"/>-->
-<!--                                <field name="payment_date"/>-->
+                                <!--                                <field name="invoice_date"/>-->
+                                <!--                                <field name="payment_date"/>-->
                             </group>
                             <group>
                                 <field name="booking_vehicle_code"/>
@@ -75,6 +75,7 @@
                             <group class="oe_right">
                                 <field name="booking_tour_sale"/>
                                 <field name="booking_tour_amount"/>
+                                <field name="booking_tour_deposit"/>
                                 <field name="booking_total_payment"/>
                                 <field name="booking_remaining_amount"/>
                                 <field name="payment_amount"/>
@@ -112,11 +113,12 @@
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_invoice_search"/>
         </record>
-
         <menuitem id="cd_travel_invoice_menu" name="Invoice"
                   parent="cd_travel_menu"
                   action="view_travel_invoice_act"
                   groups="group_cd_travel_accountant,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="4"
+        />
+
     </data>
 </odoo>

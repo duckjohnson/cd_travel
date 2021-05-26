@@ -12,9 +12,9 @@ class TravelRegion(models.Model):
 
     code = fields.Char(string='Mã vùng du lịch', default=lambda self: _('New'), readonly=True)
     name = fields.Char(string='Tên vùng du lịch', required=True)
-    description = fields.Text(string='Mô tả', required=True)
+    description = fields.Text(string='Mô tả')
 
-    name_travel_type = fields.Many2one('cd.travel.type.travel', string='Loại du lịch', required=True)
+    name_travel_type = fields.Many2one('cd.travel.type.travel', string='Loại du lịch')
 
     active = fields.Boolean(default=True, track_visibility='onchange')
 

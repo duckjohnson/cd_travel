@@ -12,7 +12,7 @@ class TravelType(models.Model):
 
     code = fields.Char(string='Mã loại du lịch', default=lambda self: _('New'), readonly=True)
     name = fields.Char(string='Tên loại du lịch', required=True)
-    description = fields.Text(string='Mô tả', required=True)
+    description = fields.Text(string='Mô tả')
     active = fields.Boolean(default=True, track_visibility='onchange')
 
     @api.model

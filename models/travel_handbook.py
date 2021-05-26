@@ -13,7 +13,7 @@ class TravelHandBook(models.Model):
     code = fields.Char(string='Mã cẩm nang', default=lambda self: _('New'), readonly=True)
     name = fields.Char(string='Tên cẩm nang', required=True)
     content = fields.Text(string='Nội dung', required=True)
-    time_handbook = fields.Date(string='Thời gian')
+    time_handbook = fields.Date(string='Thời gian đăng')
     image = fields.Binary(string='Hình ảnh')
     active = fields.Boolean(default=True, track_visibility='onchange')
 

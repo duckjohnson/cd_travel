@@ -62,11 +62,12 @@
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_customer_search"/>
         </record>
-
         <menuitem id="cd_travel_customer_menu" name="Customer"
                   parent="cd_travel_menu"
                   action="cd_travel_customer_act"
                   groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="5"
+        />
+
     </data>
 </odoo>

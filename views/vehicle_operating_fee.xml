@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="view_vehicle_operating_fee" model="ir.ui.view">
+        <record id="view_vehicle_operating_fee_tree" model="ir.ui.view">
             <field name="name">view_vehicle_operating_fee</field>
             <field name="model">cd.travel.vehicle.fee</field>
             <field name="arch" type="xml">
@@ -12,14 +12,14 @@
                 </tree>
             </field>
         </record>
-        <record id="view_vehicle_operating_fee" model="ir.ui.view">
-            <field name="name">view_vehicle_operating_fee</field>
+        <record id="view_vehicle_operating_fee_form" model="ir.ui.view">
+            <field name="name">view_vehicle_operating_fee_form</field>
             <field name="model">cd.travel.vehicle.fee</field>
             <field name="arch" type="xml">
                 <form string="Vehicle operating fee">
                     <sheet>
                         <group>
-                            <field name="name"/>
+                            <field name="name" options="{'no_create_edit': True, 'no_open': True}"/>
                             <field name="date_fee"/>
                             <field name="price"/>
                             <field name="content"/>
@@ -43,7 +43,7 @@
             </field>
         </record>
 
-         <record id="cd_travel_vehicle_operating_fee" model="ir.actions.act_window">
+        <record id="cd_travel_vehicle_operating_fee" model="ir.actions.act_window">
             <field name="name">Vehicle operating fee</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cd.travel.vehicle.fee</field>
@@ -52,9 +52,10 @@
         </record>
 
         <menuitem id="cd_operating_fee_menu" name="Vehicle operating fee"
-                  parent="cd_travel_menu"
+                  parent="cd_travel_menu_vehicle"
                   action="cd_travel_vehicle_operating_fee"
                   groups="group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="2"
+        />
     </data>
 </odoo>

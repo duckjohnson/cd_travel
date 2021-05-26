@@ -15,8 +15,8 @@ class Invoice(models.Model):
     code_invoice = fields.Char(string='Mã hóa đơn', readonly=True, compute='compute_set_code_invoice')
     payment_amount = fields.Float(string='Số tiền thanh toán')
 
-    booking_code = fields.Many2one('cd.travel.tour.booking', string='Mã đặt tour',
-                                   required=True)  # , domain=[('state', '=', 'active')]
+    booking_code = fields.Many2one('cd.travel.tour.booking', string='Mã đặt tour', required=True,
+                                   domain=['|', ('state', '=', 'inactive'), ('state', '=', 'active')])
 
     booking_tour_adults = fields.Integer(string='Người lớn', related='booking_code.adults', readonly=True)
     booking_tour_child = fields.Integer(string='Trẻ em', related='booking_code.child', readonly=True)
@@ -40,6 +40,7 @@ class Invoice(models.Model):
     booking_tour_address_start = fields.Char(string='Nơi khởi hành', readonly=True,
                                              related='booking_code.tour_detail_address_start')
     booking_tour_price = fields.Float(string='Giá tour', related='booking_code.tour_detail_price', readonly=True)
+    booking_tour_deposit = fields.Float(string='Tiền Cọc', related='booking_code.deposit', readonly=True)
     booking_total_payment = fields.Float(string='Tiền đã thanh toán', related='booking_code.total_payment')
     booking_remaining_amount = fields.Float(string='Số tiền còn lại', related='booking_code.remaining_amount')
 

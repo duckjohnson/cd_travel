@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_travel_base_salary_tree" model="ir.ui.view">
+            <field name="name">view_travel_base_salary_tree</field>
+            <field name="model">cd.travel.base.salary</field>
+            <field name="arch" type="xml">
+                <tree string="Base salary">
+                    <field name="name"/>
+                    <field name="emp_name"/>
+                    <field name="emp_position"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="money"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_travel_base_salary_form" model="ir.ui.view">
+            <field name="name">view_travel_base_salary_form</field>
+            <field name="model">cd.travel.base.salary</field>
+            <field name="arch" type="xml">
+                <form string="Base salary">
+                    <sheet>
+                        <header>
+                            <field name="state" widget="statusbar" statusbar_visible="use,stop"
+                                   clickable="true"/>
+                        </header>
+                        <group>
+                            <field name="name"/>
+                            <field name="emp_name" options="{'no_create_edit': True}"/>
+                            <field name="emp_position"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="money"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_travel_base_salary_search" model="ir.ui.view">
+            <field name="name">view_travel_base_salary_search</field>
+            <field name="model">cd.travel.base.salary</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="cd_travel_base_salary_act" model="ir.actions.act_window">
+            <field name="name">Base salary</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cd.travel.base.salary</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_id" ref="view_travel_base_salary_search"/>
+        </record>
+        <menuitem id="cd_travel_base_salary" name="Base salary"
+                  parent="cd_travel_report_salary"
+                  action="cd_travel_base_salary_act"
+                  groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="1"
+        />
+
+    </data>
+</odoo>

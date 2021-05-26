@@ -56,18 +56,18 @@
             </field>
         </record>
         <record id="cd_travel_contact_act" model="ir.actions.act_window">
-            <field name="name">Travel contact</field>
+            <field name="name">Contact</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cd.travel.contact</field>
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_contact_search"/>
         </record>
-
-        <menuitem id="cd_travel_contact_menu" name="Travel contact"
+        <menuitem id="cd_travel_contact_menu" name="Contact"
                   parent="cd_travel_menu"
                   action="cd_travel_contact_act"
                   groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="99"
+        />
 
     </data>
 </odoo>

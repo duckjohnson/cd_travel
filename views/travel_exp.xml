@@ -48,18 +48,18 @@
             </field>
         </record>
         <record id="cd_travel_experience_act" model="ir.actions.act_window">
-            <field name="name">Travel experience</field>
+            <field name="name">Experience</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cd.travel.experience</field>
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_experience_search"/>
         </record>
-
-        <menuitem id="cd_travel__experience_menu" name="Travel experience"
-                  parent="cd_travel_menu"
+        <menuitem id="cd_travel__experience_menu" name="Experience"
+                  parent="cd_travel_menu_news"
                   action="cd_travel_experience_act"
                   groups="group_cd_travel_posting_staff,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="3"
+        />
 
     </data>
 </odoo>

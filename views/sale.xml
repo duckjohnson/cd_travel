@@ -22,7 +22,7 @@
                         <button name="go_to_website" type="object" string="Go to website" class="oe_highlight"/>
                     </header>
                     <sheet>
-                         <div class="oe_button_box" name="button_box">
+                        <div class="oe_button_box" name="button_box">
                             <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
                                 <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
                             </button>
@@ -45,24 +45,24 @@
                     <separator/>
                     <group expand="0" string="Group By">
                         <filter name="group_by_type" string="Type" context="{'group_by':'type'}"/>
-                        <filter name="group_by_amount" string="amount" context="{'group_by':'amount'}"/>
                     </group>
                 </search>
             </field>
         </record>
 
-         <record id="cd_travel_sale_act" model="ir.actions.act_window">
+        <record id="cd_travel_sale_act" model="ir.actions.act_window">
             <field name="name">Sale</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">cd.travel.info.sale</field>
             <field name="view_mode">tree,form</field>
             <field name="search_id" ref="view_travel_sale_search"/>
         </record>
-
         <menuitem id="cd_travel_sale_menu" name="Sale"
                   parent="cd_travel_menu"
                   action="cd_travel_sale_act"
                   groups="group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="8"
+        />
+
     </data>
 </odoo>

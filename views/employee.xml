@@ -20,6 +20,10 @@
             <field name="arch" type="xml">
                 <form string="Field">
                     <sheet>
+                        <header attrs="{'invisible': [('position_name','=', 'guide')]}">
+                            <field name="state" widget="statusbar" statusbar_visible="free_time,working"
+                                   clickable="true"/>
+                        </header>
                         <group>
                             <group>
                                 <field name='code'/>
@@ -31,12 +35,25 @@
                             <group>
                                 <field name='gender'/>
                                 <field name='address'/>
-                                <field name='position_name'/>
+                                <field name='position_name' options="{'no_create_edit': True}"/>
                                 <field name='account'/>
                                 <field name='account_login'/>
-                                <field name="salary"/>
+                                <field name="base_money"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page name="salary" string="Danh sách hợp đồng">
+                                <field name="salary">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="from_date" readonly="True"/>
+                                        <field name="to_date" readonly="True"/>
+                                        <field name="money" readonly="True"/>
+                                        <field name="state" readonly="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -61,11 +78,12 @@
             <field name="search_id" ref="cd_employee_search"/>
 
         </record>
-
         <menuitem id="cd_employee_menu" name="Employee"
                   parent="cd_travel_menu"
                   action="cd_employee_act"
                   groups="group_cd_travel_posting_staff,group_cd_travel_employee_booking,group_cd_travel_accountant,group_cd_travel_manager,group_cd_travel_admin"
-                  sequence="1"/>
+                  sequence="6"
+        />
+
     </data>
 </odoo>

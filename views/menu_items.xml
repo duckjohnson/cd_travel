@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Top menu item -->
+        <menuitem id="cd_travel_menu" name="CD travel"
+                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
+                  web_icon="static/description/icon.png"
+                  sequence="1"
+        />
+        <!--        CD-Travel sub-menus-->
+        <menuitem id="cd_travel_menu_travel" name="Travel type"
+                  parent="cd_travel_menu"
+                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
+                  sequence="1"
+        />
+        <menuitem id="cd_travel_menu_tour" name="Travel tour"
+                  parent="cd_travel_menu"
+                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
+                  sequence="2"
+        />
+        <menuitem id="cd_travel_menu_vehicle" name="Vehicle" sequence="9"
+                  parent="cd_travel_menu"
+                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
+        />
+        <menuitem id="cd_travel_menu_news" name="News"
+                  parent="cd_travel_menu"
+                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
+                  sequence="11"
+        />
+        <menuitem id="cd_travel_kpi" name="KPI"
+                  parent="cd_travel_menu"
+                  groups="group_cd_travel_employee_booking,group_cd_travel_manager,group_cd_travel_admin"
+                  sequence="12"
+        />
+
+        <menuitem id="cd_travel_report_salary" name="Report Salary"
+                  parent="cd_travel_menu"
+                  groups="cd-travel.group_cd_travel_posting_staff,cd-travel.group_cd_travel_employee_booking"
+                  sequence="100"
+        />
+    </data>
+</odoo>
